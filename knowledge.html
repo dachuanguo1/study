@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>知识点讲解库</title>
+<link rel="stylesheet" href="katex/katex.min.css">
+<style>
+:root{color-scheme:light dark;--b:#e5e5ea;--f:#f7f7f9;--a:#0a84ff;--m:#8e8e93;--g:#34c759}
+@media(prefers-color-scheme:dark){:root{--b:#333;--f:#1c1c1e;--a:#0a84ff;--m:#8e8e93;--g:#30d158}}
+*{box-sizing:border-box}
+body{margin:0 auto;padding:calc(16px + env(safe-area-inset-top)) 14px 70px;max-width:760px;
+ font:-apple-system-body,system-ui,"PingFang SC",sans-serif;line-height:1.65;
+ background:#fff;color:#1c1c1e}
+@media(prefers-color-scheme:dark){body{background:#000;color:#e5e5e7}}
+h1{font-size:22px;margin:0 0 2px}
+.sub{color:var(--m);font-size:13px;margin:0 0 14px}
+.filters{display:flex;gap:6px;margin-bottom:10px;overflow-x:auto;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+.filters::-webkit-scrollbar{display:none}
+.fb{flex:0 0 auto;white-space:nowrap;border:1px solid var(--b);background:var(--f);color:inherit;
+ border-radius:16px;padding:5px 12px;font-size:13px;font-family:inherit}
+.fb.on{background:var(--g);color:#fff;border-color:var(--g)}
+.fb b{font-weight:600;opacity:.6;font-size:11px;margin-left:2px}
+.fb.on b{opacity:.85}
+.fb.dim{opacity:.45}
+#q{width:100%;border:1px solid var(--b);border-radius:10px;padding:10px 12px;
+ font-size:16px;background:var(--f);color:inherit;margin-bottom:16px}
+#nav.collapsed{display:none}
+#nav{margin-bottom:18px;border-top:1px solid var(--b);padding-top:12px}
+.subj{margin-bottom:18px}
+.subj.empty-subj h2{border-bottom-color:var(--b);color:var(--m)}
+.subj.empty-subj .chaps li{opacity:.45}
+.subj h2{font-size:16px;margin:0 0 6px;padding-bottom:6px;border-bottom:2px solid var(--g);
+ display:flex;justify-content:space-between;align-items:baseline}
+.cnt{font-size:12px;color:var(--m);font-weight:400}
+.chaps{list-style:none;margin:0;padding:0}
+.chaps li{display:flex;align-items:baseline;gap:8px;padding:7px 2px;
+ border-bottom:1px dashed var(--b);font-size:14px;flex-wrap:wrap}
+.chaps li[data-chap] .cn{flex:0 0 auto;max-width:40%;font-weight:500}
+.chaps li[data-chap] .ln{flex:1 1 0}
+.chaps li.empty{color:var(--m);opacity:.5}
+.cn{flex:0 0 auto;max-width:44%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ln{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.ln a{font-size:12px;padding:1px 6px;border-radius:5px;background:rgba(52,199,89,.13);
+ color:#248a3d;max-width:100%}
+@media(prefers-color-scheme:dark){.ln a{color:#30d158}}
+.n{font-size:12px;color:var(--m);font-variant-numeric:tabular-nums}
+a{color:var(--a);text-decoration:none}
+.card{background:var(--f);border:1px solid var(--b);border-radius:12px;
+ padding:16px;margin:0 0 18px}
+.card.intro{background:rgba(52,199,89,.07);border-color:rgba(52,199,89,.35);font-size:14px}
+.crumb{display:block;font-size:12px;color:var(--m);margin:0 0 6px 0}
+.crumb2{font-size:12px;color:var(--m)}
+.card h3.kpname{font-size:18px;margin:2px 0 12px;line-height:1.4}
+.card h4{font-size:15px;margin:14px 0 6px}
+.card p{margin:6px 0;font-size:15px}
+.card ul,.card ol{margin:6px 0;padding-left:22px}
+.card li{margin:3px 0;font-size:15px}
+code{background:rgba(120,120,128,.15);padding:1px 5px;border-radius:4px;font-size:14px}
+pre{background:rgba(120,120,128,.12);padding:10px 12px;border-radius:8px;overflow-x:auto;
+ font-size:13px;line-height:1.5}
+pre code{background:none;padding:0}
+blockquote{margin:8px 0;padding:6px 12px;border-left:3px solid var(--g);
+ background:rgba(52,199,89,.08);border-radius:0 6px 6px 0;font-size:14.5px}
+blockquote p{margin:3px 0}
+.mathblock{overflow-x:auto;overflow-y:hidden;padding:4px 0;text-align:center}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--b);padding:5px 9px;text-align:left}
+th{background:rgba(120,120,128,.1);font-weight:600}
+.back{text-align:right;margin-top:14px;font-size:13px}
+.hidden{display:none!important}
+#navbar{display:flex;justify-content:space-between;align-items:center;
+ padding:10px 2px;border-bottom:1px solid var(--b);margin-bottom:6px}
+#navtitle{font-size:14px;font-weight:600;color:var(--m)}
+#toggleNav{border:1px solid var(--b);background:var(--f);color:var(--a);
+ border-radius:14px;padding:4px 14px;font-size:13px;font-family:inherit}
+#fab{position:fixed;right:16px;bottom:calc(22px + env(safe-area-inset-bottom));width:46px;height:46px;
+ border-radius:23px;background:var(--g);color:#fff;display:none;align-items:center;
+ justify-content:center;font-size:20px;box-shadow:0 3px 14px rgba(0,0,0,.25);z-index:99;text-decoration:none}
+#fab.show{display:flex}
+</style></head><body id="top">
+<h1>📗 知识点讲解库</h1>
+<p class="sub">共 10 条 · 点科目看章节 · 搜索框即时过滤</p>
+<div class="filters" id="fb"><button class="fb" data-f="数据结构">数据结构 <b>7</b></button><button class="fb dim" data-f="计算机组成原理">计算机组成原理 <b>0</b></button><button class="fb" data-f="操作系统">操作系统 <b>1</b></button><button class="fb" data-f="计算机网络">计算机网络 <b>2</b></button><button class="fb dim" data-f="高等数学">高等数学 <b>0</b></button><button class="fb dim" data-f="线性代数">线性代数 <b>0</b></button></div>
+<input id="q" placeholder="搜章节 / 知识点 / 关键词…" autocomplete="off">
+<div id="navbar">
+  <span id="navtitle">章节目录</span>
+  <button id="toggleNav">展开</button>
+</div>
+<div id="nav" class="collapsed"><section class="subj"><h2 data-s="数据结构">数据结构<span class="cnt">7 条</span></h2><ul class="chaps"><li data-chap="查找"><span class="cn">查找</span><span class="ln"><a href="#kp-数据结构-ch-01">数据结构-01</a><a href="#kp-数据结构-ch-02">数据结构-02</a></span><span class="n">2</span></li><li data-chap="排序"><span class="cn">排序</span><span class="ln"><a href="#kp-数据结构-ch-01">数据结构-03</a><a href="#kp-数据结构-ch-02">数据结构-04</a><a href="#kp-数据结构-ch-03">数据结构-05</a><a href="#kp-数据结构-ch-04">数据结构-06</a><a href="#kp-数据结构-ch-05">数据结构-07</a></span><span class="n">5</span></li><li class="empty">线性表<span class="n">0</span></li><li class="empty">栈、队列和数组<span class="n">0</span></li><li class="empty">树与二叉树<span class="n">0</span></li><li class="empty">图<span class="n">0</span></li></ul></section><section class="subj empty-subj"><h2 data-s="计算机组成原理">计算机组成原理<span class="cnt">0 条</span></h2><ul class="chaps"><li class="empty">计算机系统概述<span class="n">0</span></li><li class="empty">数据的表示和运算<span class="n">0</span></li><li class="empty">存储系统<span class="n">0</span></li><li class="empty">指令系统<span class="n">0</span></li><li class="empty">中央处理器<span class="n">0</span></li><li class="empty">总线<span class="n">0</span></li><li class="empty">输入/输出系统<span class="n">0</span></li></ul></section><section class="subj"><h2 data-s="操作系统">操作系统<span class="cnt">1 条</span></h2><ul class="chaps"><li data-chap="输入/输出管理"><span class="cn">输入/输出管理</span><span class="ln"><a href="#kp-OS-ch-01">OS-01</a></span><span class="n">1</span></li><li class="empty">操作系统概述<span class="n">0</span></li><li class="empty">进程与线程<span class="n">0</span></li><li class="empty">内存管理<span class="n">0</span></li><li class="empty">文件管理<span class="n">0</span></li></ul></section><section class="subj"><h2 data-s="计算机网络">计算机网络<span class="cnt">2 条</span></h2><ul class="chaps"><li data-chap="数据链路层"><span class="cn">数据链路层</span><span class="ln"><a href="#kp-计网-ch-01">计网-02</a></span><span class="n">1</span></li><li data-chap="性能指标"><span class="cn">性能指标</span><span class="ln"><a href="#kp-计网-ch-01">计网-01</a></span><span class="n">1</span></li><li class="empty">计算机网络体系结构<span class="n">0</span></li><li class="empty">物理层<span class="n">0</span></li><li class="empty">网络层<span class="n">0</span></li><li class="empty">传输层<span class="n">0</span></li><li class="empty">应用层<span class="n">0</span></li></ul></section><section class="subj empty-subj"><h2 data-s="高等数学">高等数学<span class="cnt">0 条</span></h2><ul class="chaps"><li class="empty">函数与极限<span class="n">0</span></li><li class="empty">导数与微分<span class="n">0</span></li><li class="empty">微分中值定理与导数应用<span class="n">0</span></li><li class="empty">不定积分<span class="n">0</span></li><li class="empty">定积分及其应用<span class="n">0</span></li><li class="empty">多元函数微分学<span class="n">0</span></li><li class="empty">二重积分<span class="n">0</span></li><li class="empty">微分方程<span class="n">0</span></li></ul></section><section class="subj empty-subj"><h2 data-s="线性代数">线性代数<span class="cnt">0 条</span></h2><ul class="chaps"><li class="empty">行列式<span class="n">0</span></li><li class="empty">矩阵<span class="n">0</span></li><li class="empty">向量<span class="n">0</span></li><li class="empty">线性方程组<span class="n">0</span></li><li class="empty">矩阵的特征值和特征向量<span class="n">0</span></li><li class="empty">二次型<span class="n">0</span></li></ul></section></div>
+<article class="card" id="kp-数据结构-ch-01" data-subj="数据结构" data-chap="查找" data-label="数据结构-01"><header><span class="num">数据结构-01</span><span class="crumb2">数据结构 › 查找</span></header><h3 class="kpname">B 树的高度↔关键字个数极值：最少为什么不是&quot;每层 1 个&quot;</h3><p><strong>一句话</strong>：$m$ 阶 B 树高 $h$ 时，$n\in\left[2\lceil m/2\rceil^{h-1}-1,\; m^h-1\right]$；下限靠&quot;根出 2、其余结点出 $\lceil m/2\rceil$&quot;逐层数结点，上限靠每结点塞满。</p>
+<p><strong>原理</strong>：</p>
+<table><thead><tr><th>结点类型</th><th>孩子数</th><th>关键字数</th></tr></thead><tbody><tr><td>根（非叶）</td><td>$\ge 2$</td><td>$\ge 1$</td></tr><tr><td>其他内部结点</td><td>$\ge \lceil m/2\rceil$</td><td>$\ge \lceil m/2\rceil-1$</td></tr><tr><td>任意结点上限</td><td>$\le m$</td><td>$\le m-1$</td></tr></tbody></table>
+<p>关键字最少 ⇔ 每结点取最少孩子数。第 $k$ 层结点数最少 $2\lceil m/2\rceil^{k-2}$，合计</p>
+<div class="mathblock">$$n_{\min}=1+\sum_{k=2}^{h}2\lceil m/2\rceil^{k-2}(\lceil m/2\rceil-1)\;=\;2\lceil m/2\rceil^{h-1}-1$$</div>
+<p>关键字最多 ⇔ 每结点塞满：$n_{\max}=(m-1)(1+m+\cdots+m^{h-1})=m^h-1$。</p>
+<p>反解高度：$h_{\max}=\log_{\lceil m/2\rceil}\frac{n+1}{2}+1$。</p>
+<p><strong>例</strong>：$m=3$，$\lceil 3/2\rceil=2$，每结点最少 1 个关键字：</p>
+<table><thead><tr><th>高 $h$</th><th>最少 $n$</th><th>最多 $n$</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>2</td></tr><tr><td>2</td><td>3</td><td>8</td></tr><tr><td>3</td><td>7</td><td>26</td></tr><tr><td>4</td><td>15</td><td>80</td></tr><tr><td>5</td><td><strong>31</strong></td><td>242</td></tr></tbody></table>
+<p><strong>易错点</strong>：</p>
+<ol><li>阶 $m$ 是<strong>最多 $m$ 棵子树</strong>，关键字上限 $m-1$；3 阶即最多 2 个关键字、3 个孩子。</li><li>根只要 2 个孩子就合法，别也按 $\lceil m/2\rceil$ 算（否则 $h=2$ 会算成 2）。</li><li>&quot;每层结点数最少&quot;不是&quot;每层 1 个&quot;——树是连通的，下层结点数由上层孩子数决定。</li><li>$m^h-1$ 是<strong>上限</strong>，$2\lceil m/2\rceil^{h-1}-1$ 是<strong>下限</strong>，两个都常作干扰项（31 与 242）。</li><li>算完用 $h_{\max}=\log_{\lceil m/2\rceil}\frac{n+1}{2}+1$ 代回去验算。</li></ol><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-数据结构-ch-02" data-subj="数据结构" data-chap="查找" data-label="数据结构-02"><header><span class="num">数据结构-02</span><span class="crumb2">数据结构 › 查找</span></header><h3 class="kpname">删除标记（tombstone）—— 线性探测开放定址为什么不能直接置空</h3><p><strong>一句话</strong>：删除只能打删除标记，置空会截断探测链，排在删除位置之后的同义词永远查不到。</p>
+<p><strong>原理</strong>：线性探测的查找规则是「遇到空位就判定不存在」。插入时同义词被挤到后面，查找必须顺着探测序列走过去。删除时若置空，探测链半路断掉，后面的关键字就再也走不到了。</p>
+<p><strong>反例</strong>：表长 5，$H(k)=(k+4)\bmod 5$，依次插入 2022、12、25，得</p>
+<pre><code>位置:  0     1      2     3     4
+      None 2022    12    None   25</code></pre>
+<p>12 的 $H$ 值是 1，被 2022 占了才落到位置 2。若删除 2022 并<strong>置空</strong>，再查 12：从 h=1 开始遇到空位即判定「不存在」——<strong>但 12 还在位置 2，数据凭空丢了</strong>。</p>
+<p><strong>正确做法</strong>：位置打 DEL 标记，查找遇到 DEL <strong>继续探测</strong>，遇到真正的 None 才停。代价是 DEL 占用位置、拉长探测链，删除多的表需定期整理（rehash）。</p><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-计网-ch-01" data-subj="计算机网络" data-chap="性能指标" data-label="计网-01"><header><span class="num">计网-01</span><span class="crumb2">计算机网络 › 性能指标</span></header><h3 class="kpname">分组传送的总时延为什么是「N·T + T + 跳数·tp」</h3><p><strong>一句话</strong>：<code>文件大小 ÷ 带宽</code> 只算出<strong>最后一个分组的起点</strong>，不是终点，必须再加一个分组发送时延。</p>
+<p><strong>记号</strong>：</p>
+<ul><li><code>T</code> = 一个分组的发送时延 = 分组长度 ÷ 带宽</li><li><code>tp</code> = 单段链路传播时延 = 时延带宽积 ÷ 带宽</li><li><code>N</code> = 分组数</li></ul>
+<p><strong>公式</strong>：</p>
+<div class="mathblock">$$T_{\text{总}} = N\cdot T + T + (\text{跳数})\cdot t_p$$</div>
+<p><strong>为什么多一个 T</strong>：$N\cdot T$ 是「整个文件的主体在源端串行化完毕」的时刻，也就是<strong>第 N 个分组刚开始被发送</strong>的时刻。它自己还要在链路上占满一个 $T$ 才能整体出去。</p>
+<p><strong>为什么不是 $2N\cdot T$</strong>：两段链路的发送过程是<strong>流水线重叠</strong>的——源端发第 k 组时，路由器正在转发第 k-1 组。只有最后一个分组的尾巴无法被后面的分组盖住，所以只多出一个 $T$。</p>
+<p><strong>例（第 33 题型）</strong>：2 段链路，100 Mbps，每段时延带宽积 1000 bit，1 MB 文件按 1000 B 分组。</p>
+<ul><li>$t_p = 1000/10^8 = 0.01$ ms</li><li>$T = 8000/10^8 = 0.08$ ms</li><li>$N = 10^6/1000 = 1000$</li><li>$T_{\text{总}} = 1000\times0.08 + 0.08 + 2\times0.01 = 80.10$ ms</li></ul>
+<p><strong>选项经常就是四种错法</strong>：漏那个 +T（80.02）、漏传播（80.08）、只算一段传播（80.09）、全对（80.10）。</p>
+<p><strong>易错点</strong>：时延带宽积（bit）只能除以带宽得到 $t_p$，<strong>它本身不是时间</strong>。</p><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-计网-ch-01" data-subj="计算机网络" data-chap="数据链路层" data-label="计网-02"><header><span class="num">计网-02</span><span class="crumb2">计算机网络 › 数据链路层</span></header><h3 class="kpname">信道利用率与滑动窗口、CSMA/CD 退避的关系</h3><p><strong>一句话</strong>：信道利用率衡量「一个发送周期里，有效发数据的时间占比」；窗口大小决定一个周期能塞几个帧，退避算法决定冲突后等多久。</p>
+<p><strong>信道利用率</strong>：</p>
+<div class="mathblock">$$U=\frac{L/C}{L/C+2R}$$</div>
+<p>其中 $L$ 是帧长，$C$ 是带宽，$R$ 是单程传播时延。分母是一个完整发送周期（发帧时间 + 等待确认往返时间），分子是其中真正在发数据的时间。</p>
+<p><strong>滑动窗口</strong>：帧序号占 3 bit → 发送窗口最大 $2^3 = 8$ 帧，即一个发送周期内最多能连着发 8 帧。</p>
+<p><strong>CSMA/CD 截断二进制指数退避</strong>：第 k 次重传后，从 $\{0,1,\dots,2^k-1\}$ 中随机取 τ，退避 $τ$ 倍争用期；$k=\min(\text{重传次数},10)$，即超过 10 次后范围不再翻倍。</p>
+<p><strong>联系</strong>：窗口越大 → 一个周期发的数据越多 → $U$ 越接近 1。</p><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-数据结构-ch-01" data-subj="数据结构" data-chap="排序" data-label="数据结构-03"><header><span class="num">数据结构-03</span><span class="crumb2">数据结构 › 排序</span></header><h3 class="kpname">堆不是二叉排序树：局部偏序 vs 全局有序</h3><p><strong>一句话</strong>：大根堆只保证「父 ≥ 子」，兄弟之间、左右子树之间无序；二叉排序树要求中序遍历递增。两者的区别不是「都是二叉树」就能互相套用。</p>
+<p><strong>原理</strong>：</p>
+<table><thead><tr><th></th><th>大根堆</th><th>二叉排序树</th></tr></thead><tbody><tr><td>形态</td><td><strong>必须</strong>是完全二叉树</td><td>任意二叉树</td></tr><tr><td>约束</td><td>只压父子：$a_i\ge a_{2i},\ a_i\ge a_{2i+1}$</td><td>全局有序：左 &lt; 根 &lt; 右</td></tr><tr><td>中序遍历</td><td>无序</td><td>递增</td></tr><tr><td>存储</td><td>顺序存储（数组），下标 $2i$ / $2i+1$</td><td>通常链式</td></tr></tbody></table>
+<p>反例：<code>[9, 8, 3]</code> 是大根堆（9≥8, 9≥3），中序为 <code>8, 9, 3</code>，不是递增 → 不是二叉排序树。</p>
+<p>堆只保证「<strong>任一条从根到叶的路径单调不增</strong>」，同层之间、左右子树根之间完全没有可比性。</p>
+<p><strong>次大值为什么一定在根的下一层</strong></p>
+<p>设根 $r$，孩子 $c_1,c_2$（可能只有一个）。元素数 $\ge2$ 时根至少有左孩子。除根外任意元素 $x$ 必在某棵孩子子树里：</p>
+<ul><li>$x$ 在 $c_1$ 子树 → $x\le\cdots\le c_1$，故 $x\le c_1$</li><li>$x$ 在 $c_2$ 子树 → $x\le c_2$</li></ul>
+<p>所以除根外所有元素 $\le \max(c_1,c_2)$，而 $\max(c_1,c_2)$ 本身就在第二层：</p>
+<div class="mathblock">$$\textbf{次大值} = \max(c_1,c_2) \in \text{第二层}$$</div>
+<p><strong>推论：</strong></p>
+<ul><li>次大值 = 根的<strong>较大孩子</strong>（不是固定左或右）</li><li>最小值一定在<strong>叶子</strong>上（大根堆）</li><li>第 2 层以下不可能有次大值，哪怕某个孙结点数值看起来很大——它必被它的父压着</li></ul>
+<p><strong>例</strong>：<code>[10, 9, 2, 8]</code>，第二层是 9、2，次大值 9 = max(9,2) ✓；<code>[10, 2, 9, 1]</code>，第二层 2、9，次大值 9 ✓；只有两个元素 <code>[5,3]</code>，第二层只有 3，次大值 3 ✓。</p>
+<p><strong>易错点</strong>：</p>
+<ol><li>「堆可以看成完全二叉树」——不是&quot;可以&quot;，是<strong>必须</strong>；不完全二叉树的数组表示会有空档，那就不是堆。</li><li>堆用顺序存储<strong>不浪费空间</strong>，因为完全二叉树没有空档；二叉排序树用链式更常见。</li><li>判断&quot;是不是二叉排序树&quot;只有一个可靠办法：<strong>写出中序遍历看是否递增</strong>，不要凭形状猜。</li><li>&quot;次大值在下一层&quot;的严格依据是<strong>子树包含关系</strong>（除根外全在某棵子树里 + 子树内 ≤ 子树根），不是靠画图看。</li><li>别把&quot;大根堆&quot;和&quot;小根堆&quot;的结论混用：小根堆里 <strong>次小值</strong> 才在根的下一层。</li></ol>
+<p><strong>一句话</strong>：删除只能打删除标记，置空会截断探测链，导致排在删除位置之后的同义词永远查不到。</p>
+<p><strong>原理</strong>：线性探测的查找规则是「<strong>遇到空位就判定不存在</strong>」。插入时同义词会被挤到后面，查找时必须顺着探测序列走到它们。如果删除时把位置置成空位，探测序列就在半路断掉，后面被挤过去的关键字就再也走不到了。</p>
+<p><strong>反例</strong>：表长 5，<code>H(k)=(k+4)%5</code>，依次插入 2022、12、25，得</p>
+<pre><code>位置:  0     1      2     3     4
+      None 2022    12    None   25</code></pre>
+<p>12 的 H 值是 1，被 2022 占了才落到位置 2。此时若删除 2022 并<strong>置空</strong>：</p>
+<pre><code>位置:  0     1      2     3     4
+      None  None   12    None   25</code></pre>
+<p>再查 12：从 h=1 开始 → 位置 1 是空 → 判定「不存在」。<strong>但 12 明明还在位置 2，数据凭空丢了。</strong></p>
+<p><strong>正确做法</strong>：位置 1 打删除标记（DEL），查找时遇到 DEL <strong>继续探测</strong>，遇到真正的 None 才停。</p>
+<p><strong>代价</strong>：DEL 会占用位置、拉长探测链，长期删除多的表需要定期整理（rehash）。</p>
+<blockquote><p>外部排序全流程：分块生成初始归并段 → 多趟多路归并。评价指标是<strong>外存 I/O 次数</strong>，不是比较次数。</p></blockquote><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-数据结构-ch-02" data-subj="数据结构" data-chap="排序" data-label="数据结构-04"><header><span class="num">数据结构-04</span><span class="crumb2">数据结构 › 排序</span></header><h3 class="kpname">多路归并的趟数</h3><p><strong>一句话</strong>：$k$ 路归并 $r$ 个初始段，趟数 $=\lceil \log_k r\rceil$。</p>
+<p><strong>原理</strong>：每趟归并把段数缩为原来的 $1/k$。想减少 I/O，要么增大 $k$（多路），要么减小 $r$（置换-选择排序）。</p>
+<p><strong>例</strong>：$r=1000$，2 路 → 10 趟；5 路 → 5 趟。</p><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-数据结构-ch-03" data-subj="数据结构" data-chap="排序" data-label="数据结构-05"><header><span class="num">数据结构-05</span><span class="crumb2">数据结构 › 排序</span></header><h3 class="kpname">败者树：k 路归并每次只需 log₂k 次比较</h3><p><strong>一句话</strong>：败者树是完全二叉树，内部结点记录<strong>败者</strong>，胜者继续向上比，每输出一个记录只需 $\lceil\log_2 k\rceil$ 次比较。</p>
+<p><strong>原理</strong>：朴素从 k 个段中挑最小要比较 $k-1$ 次；败者树把比较组织成树形，替换叶子后只沿原路径向上重比。</p>
+<p><strong>例</strong>：$k=8$，朴素 7 次；败者树 3 次。</p>
+<p><strong>易错点</strong>：</p>
+<ul><li>结点里存的是<strong>败者</strong>，不是胜者（根上方另设“冠军”）。</li><li>存败者的好处：新元素换掉叶子后，只需沿那条路径重比，不用重建树。</li></ul><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-数据结构-ch-04" data-subj="数据结构" data-chap="排序" data-label="数据结构-06"><header><span class="num">数据结构-06</span><span class="crumb2">数据结构 › 排序</span></header><h3 class="kpname">置换-选择排序：初始段长度可以超过内存</h3><p><strong>一句话</strong>：内存工作区 $W$ 个位置，但一个归并段可以写到约 <strong>$2W$</strong> 长。</p>
+<p><strong>原理</strong>：装满 $W$ 个元素，每次输出当前最小者并补一个新元素：</p>
+<ul><li>新元素 <strong>≥</strong> 刚输出的 → 能接在当前段后面，继续用</li><li>新元素 <strong>&lt;</strong> 刚输出的 → 会破坏有序性，<strong>压在工作区</strong>留给下一段</li></ul>
+<p>新读入元素约有半数比刚输出的大，所以段长平均约 $2W$。</p>
+<p><strong>例</strong>：内存 3 个位置，能生成 6 个左右长度的段，而不是 3 个。</p><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-数据结构-ch-05" data-subj="数据结构" data-chap="排序" data-label="数据结构-07"><header><span class="num">数据结构-07</span><span class="crumb2">数据结构 › 排序</span></header><h3 class="kpname">最佳归并树：用 k 叉哈夫曼树最小化 I/O</h3><p><strong>一句话</strong>：叶权 = 各初始段长度，建 <strong>k 叉哈夫曼树</strong>，$\sum(\text{权}\times\text{层数})$ 就是总 I/O 记录数。</p>
+<p><strong>原理</strong>：短段先归并，长段尽量靠近根（参与归并次数少）。</p>
+<p><strong>补虚段的判据（最容易错的地方）</strong>：</p>
+<div class="mathblock">$$(r-1)\bmod(k-1)=0\ ?$$</div>
+<ul><li>等于 0 → 不补</li><li>不等于 0 → 补 $(k-1)-\big((r-1)\bmod(k-1)\big)$ 个<strong>长度为 0 的虚段</strong></li></ul>
+<p><strong>为什么是 $(r-1)$</strong>：每个内部结点消耗 k 个、产生 1 个，净减少 $k-1$；最后剩 1 个结点，故 $(r&#x27;-1)$ 必须是 $(k-1)$ 的倍数。</p>
+<p><strong>虚段放哪</strong>：<strong>最底层、离根最远</strong>。权为 0，放底层不增加 I/O。</p>
+<p><strong>例</strong>：5 段做 3 路 → $(5-1)\bmod2=0$，不补；6 段做 3 路 → $(6-1)\bmod2=1$，补 1 个，变成 7 个。</p><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<article class="card" id="kp-OS-ch-01" data-subj="操作系统" data-chap="输入/输出管理" data-label="OS-01"><header><span class="num">OS-01</span><span class="crumb2">操作系统 › 输入/输出管理</span></header><h3 class="kpname">从键盘读一个字符的完整流程：阻塞为什么一定切换、中断为什么在内核态</h3><p><strong>一句话</strong>：进程调 <code>read()</code> 读键盘字符，发现数据没到就<strong>主动阻塞</strong>（必然切换）；用户敲键触发中断，<strong>内核态</strong>把字符搬进缓冲区，进程才被唤醒到<strong>就绪</strong>（有资格但不保证立刻运行）。</p>
+<p><strong>完整顺序</strong>（以「进程 P 通过系统调用从键盘读入一个字符」为例）：</p>
+<pre><code>P 执行 read() → 内核发现数据未到
+② P 插入阻塞队列（阻塞态，调度器切走）
+   ↓
+⑥ 用户通过键盘输入字符
+   ↓ 键盘控制器产生中断请求
+④ 启动键盘中断处理程序
+   ↓
+③ 将字符从键盘控制器读入系统缓冲区
+   ↓
+① 将 P 插入就绪队列（就绪态）
+   ↓
+⑤ 进程 P 从系统调用返回</code></pre>
+<p>即 <strong>②⑥④③①⑤</strong>。</p>
+<p><strong>阻塞 vs 就绪</strong>：</p>
+<table><thead><tr><th>动作</th><th>进程状态</th><th>是否切换/可调度</th></tr></thead><tbody><tr><td>② 插入<strong>阻塞</strong>队列</td><td>阻塞态</td><td><strong>一定</strong>让出 CPU，不可能被调度</td></tr><tr><td>① 插入<strong>就绪</strong>队列</td><td>就绪态</td><td><strong>有资格</strong>被调度，但不保证立刻被选中</td></tr></tbody></table>
+<blockquote><p>阻塞态不能运行，就绪态才有可能运行——这是 (2) 问的核心。</p></blockquote>
+<p><strong>④ 在 ③ 之前</strong>：先进入中断处理程序，再由它去读数据。别把顺序搞反。</p>
+<p><strong>哪个步骤是设备驱动干的</strong>：④（启动中断处理程序）和 ③（读入系统缓冲区）。设备驱动负责响应中断、与设备控制器交互、把数据搬进缓冲区。</p>
+<p><strong>中断发生时</strong>：</p>
+<ul><li>被中断的进程 P 处于<strong>阻塞态</strong>（它在等数据）</li><li>CPU 处于<strong>内核态</strong>——中断处理程序是内核代码，只有内核态才能直接操作设备、访问内核数据结构；用户态无权处理硬件中断</li></ul>
+<p><strong>易错点</strong>：</p>
+<ul><li>把 ③ 排在 ④ 前面（应该先启动中断处理程序）</li><li>认为插入就绪队列就一定会立刻运行（只是有资格）</li><li>认为中断可以发生在用户态（中断处理一定进内核态）</li></ul><div class="back"><a href="#" class="totop">↑ 返回目录</a></div></article>
+<a href="#" id="fab" title="返回目录">↑</a>
+<script>
+var cards=[].slice.call(document.querySelectorAll('.card'));
+var nav=document.getElementById('nav');
+var secs=[].slice.call(document.querySelectorAll('.subj'));
+var cur='';
+function hideNav(){$('#nav').classList.add('collapsed');document.getElementById('toggleNav').textContent='展开';}
+function $(s){return document.querySelector(s);}
+function show(x){x.classList.remove('hidden');}
+document.querySelectorAll('.fb').forEach(function(b){
+  b.addEventListener('click',function(){
+    var f=b.getAttribute('data-f');
+    if(cur===f){cur='';b.classList.remove('on');hideNav();}
+    else{
+      cur=f;
+      document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      secs.forEach(function(sec){
+        var h=sec.querySelector('h2');
+        sec.classList.toggle('hidden', h.getAttribute('data-s')!==f);
+      });
+      nav.classList.remove('collapsed');
+      document.getElementById('toggleNav').textContent='收起';
+    }
+    cards.forEach(function(c){
+      c.classList.toggle('hidden', !!cur && c.getAttribute('data-subj')!==cur);
+    });
+    var q=$('#q');
+    if(q.value.trim()){q.dispatchEvent(new Event('input'));}
+  });
+});
+document.getElementById('toggleNav').addEventListener('click',function(){
+  var c=nav.classList.toggle('collapsed');
+  this.textContent=c?'展开':'收起';
+});
+document.getElementById('q').addEventListener('input',function(){
+  var v=this.value.trim().toLowerCase();
+  cards.forEach(function(c){
+    var ok=true;
+    if(cur)ok=c.getAttribute('data-subj')===cur;
+    if(ok&&v)ok=c.textContent.toLowerCase().indexOf(v)>=0;
+    c.classList.toggle('hidden',!ok);
+  });
+});
+document.querySelectorAll('.totop').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    document.querySelectorAll('.card').forEach(function(c){c.classList.remove('hidden');});
+    cur='';
+    document.querySelectorAll('.fb').forEach(function(x){x.classList.remove('on');});
+    secs.forEach(function(s){s.classList.remove('hidden');});
+    hideNav();
+    try{history.replaceState(null,'',location.pathname);}catch(e){}
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+window.addEventListener('scroll',function(){
+  document.getElementById('fab').classList.toggle('show',window.scrollY>500);
+});
+</script>
+<script src="katex/katex.min.js"></script>
+<script src="math.js"></script>
+</body></html>
